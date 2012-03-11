@@ -1,4 +1,6 @@
 InfoT::Application.routes.draw do
+  resources :categories
+
   resources :oauth_infos
 
   controller :oauth_infos do

@@ -30,5 +30,13 @@ gem 'sqlite3'
 #   gem 'webrat'
 # end
 
+# 微博所需
 gem 'weibo','0.0.2'
 gem 'crack'
+
+# 分页所需
+gem 'will_paginate', '>= 3.0.pre'
+
+
+
+

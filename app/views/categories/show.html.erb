@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <% if Category.find_by_id(@category.parent_id) %>
+    <%= Category.find_by_id(@category.parent_id).name %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>
