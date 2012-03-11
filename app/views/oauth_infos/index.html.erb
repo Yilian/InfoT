@@ -1,0 +1,17 @@
+<h1>Oauth_infos</h1>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Atoken:</b>
+  <%= @oauth_info.atoken %>
+</p>
+
+<p>
+  <b>Asecret:</b>
+  <%= @oauth_info.asecret %>
+</p>
+
+<br />
+
+<%= link_to 'Get a new authorization', new_oauth_info_path %>

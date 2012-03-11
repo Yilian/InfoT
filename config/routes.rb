@@ -1,4 +1,9 @@
 InfoT::Application.routes.draw do
+  resources :oauth_infos
+
+  controller :oauth_infos do
+    get 'callback' => :callback
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
