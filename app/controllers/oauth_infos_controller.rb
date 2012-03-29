@@ -66,7 +66,7 @@ class OauthInfosController < ApplicationController
     @oauth_info.asecret = session[:asecret]
     
     respond_to do |format|
-      if @oauth_info.update_attributesparams[:oauth_info])
+      if @oauth_info.update_attributes(params[:oauth_info])
         format.html { redirect_to(oauth_infos_url, :notice => 'A new Oauth_info was successfully gotten.') }
         format.xml  { head :ok }
       else

@@ -1,0 +1,41 @@
+<%= form_for(@weibo_info) do |f| %>
+  <% if @weibo_info.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@weibo_info.errors.count, "error") %> prohibited this weibo_info from being saved:</h2>
+
+      <ul>
+      <% @weibo_info.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :weibo_id %><br />
+    <%= f.text_field :weibo_id %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br />
+    <%= f.text_area :text %>
+  </div>
+  <div class="field">
+    <%= f.label :original_create_at %><br />
+    <%= f.text_field :original_create_at %>
+  </div>
+  <div class="field">
+    <%= f.label :thumbnail_pic_url %><br />
+    <%= f.text_field :thumbnail_pic_url %>
+  </div>
+  <div class="field">
+    <%= f.label :original_pic_url %><br />
+    <%= f.text_field :original_pic_url %>
+  </div>
+  <div class="field">
+    <%= f.label :weibo_user_id %><br />
+    <%= f.text_field :weibo_user_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

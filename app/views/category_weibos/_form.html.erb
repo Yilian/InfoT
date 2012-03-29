@@ -1,0 +1,25 @@
+<%= form_for(@category_weibo) do |f| %>
+  <% if @category_weibo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category_weibo.errors.count, "error") %> prohibited this category_weibo from being saved:</h2>
+
+      <ul>
+      <% @category_weibo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= f.text_field :category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :weibo_id %><br />
+    <%= f.text_field :weibo_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

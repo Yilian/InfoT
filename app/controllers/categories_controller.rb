@@ -4,8 +4,10 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.paginate :page=>params[:page], :order=>'created_at desc',
       :per_page => 20
-    @category = Category.find(1)
-
+    @category = Category.find_by_id(1)
+    
+    
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @categories }
@@ -16,7 +18,8 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-
+    @weibos = @category.weibos_in_a_category(params[:id])
+   
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @category }

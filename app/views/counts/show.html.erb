@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Weibo info:</b>
+  <%= @count.weibo_info_id %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%= @count.comments %>
+</p>
+
+<p>
+  <b>Reposts:</b>
+  <%= @count.reposts %>
+</p>
+
+
+<%= link_to 'Edit', edit_count_path(@count) %> |
+<%= link_to 'Back', counts_path %>

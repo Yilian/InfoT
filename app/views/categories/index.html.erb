@@ -2,15 +2,16 @@
 
 <table>
   <tr>
+  	<th>ID</th>
     <th>Name</th>
     <th>Parent</th>
-    <th></th>
-    <th></th>
+    <th>Total</th>
     <th></th>
   </tr>
 
 <% @categories.each do |category| %>
   <tr>
+  	<td><%= category.id %></td>
     <td><%= category.name %></td>
     <td>
     <% if Category.find_by_id(category.parent_id) %>
@@ -19,6 +20,7 @@
    		 None
   	<% end %>
     </td>
+     <td><%= category.total %></td>
     <td><%= link_to 'Show', category %></td>
     <td><%= link_to 'Edit', edit_category_path(category) %></td>
     <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,18 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
-
-<p>
-  <b>Parent:</b>
-  <% if Category.find_by_id(@category.parent_id) %>
-    <%= Category.find_by_id(@category.parent_id).name %>
-  <% else %>
-    None
-  <% end %>
-</p>
+<h1>Listing weibo_infos</h1>
 
 <table>
   <tr>
@@ -27,7 +13,7 @@
     <th></th>
   </tr>
 
-<% @weibos.each do |weibo_info| %>
+<% @weibo_infos.each do |weibo_info| %>
   <tr>
     <td><%= weibo_info.weibo_id %></td>
     <td><%= weibo_info.text %></td>
@@ -43,6 +29,12 @@
 <% end %>
 </table>
 
+<br />
 
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<p><%= will_paginate @weibo_infos,
+       :previous_label => '上一页',
+	   :next_label => '下一页' %>
+</p>
+
+<p>微博总数：<%= WeiboInfo.count%></p>
+<%= link_to 'New Weibo info', new_weibo_info_path %>

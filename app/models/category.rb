@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  
+    
   def total_categories
     Category.count
   end
@@ -25,4 +25,15 @@ class Category < ActiveRecord::Base
     count
   end
   
+  def weibos_in_a_category(categoryID)
+    categoryWeibos = CategoryWeibo.find(:all, :conditions => " category_id = '#{categoryID}'")
+    
+    weibos = []
+    categoryWeibos.each do |cw|
+      weibo = WeiboInfo.where(:weibo_id => cw.weibo_id).first
+      weibos << weibo
+    end
+    return weibos
+  end
+   
 end

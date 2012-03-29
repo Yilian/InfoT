@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  weibo_info_id: 1
+  comments: 1
+  reposts: 1
+
+two:
+  weibo_info_id: 1
+  comments: 1
+  reposts: 1

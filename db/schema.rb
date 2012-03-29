@@ -10,13 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311083656) do
+ActiveRecord::Schema.define(:version => 20120326163003) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.integer  "parent_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "total",      :default => 0
+  end
+
+  create_table "category_weibos", :force => true do |t|
+    t.integer  "category_id"
+    t.integer  "weibo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "counts", :force => true do |t|
+    t.integer  "weibo_id"
+    t.integer  "comments"
+    t.integer  "reposts"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "quantity"
   end
 
   create_table "oauth_infos", :force => true do |t|
@@ -24,6 +41,26 @@ ActiveRecord::Schema.define(:version => 20120311083656) do
     t.string   "asecret"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "users", :force => true do |t|
+    t.integer  "original_id"
+    t.string   "screen_name"
+    t.string   "profile_img_url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "weibo_infos", :force => true do |t|
+    t.integer  "weibo_id"
+    t.text     "text"
+    t.string   "original_create_at"
+    t.string   "thumbnail_pic_url"
+    t.string   "original_pic_url"
+    t.integer  "weibo_user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "retweeted_id",       :default => 0
   end
 
 end

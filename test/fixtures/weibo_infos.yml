@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  weibo_id: 1
+  text: MyText
+  original_create_at: MyString
+  thumbnail_pic_url: MyString
+  original_pic_url: MyString
+  weibo_user_id: 1
+
+two:
+  weibo_id: 1
+  text: MyText
+  original_create_at: MyString
+  thumbnail_pic_url: MyString
+  original_pic_url: MyString
+  weibo_user_id: 1
