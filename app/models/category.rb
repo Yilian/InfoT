@@ -25,8 +25,9 @@ class Category < ActiveRecord::Base
     count
   end
   
-  def weibos_in_a_category(categoryID)
-    categoryWeibos = CategoryWeibo.find(:all, :conditions => " category_id = '#{categoryID}'")
+  
+  def weibos(categoryID)
+    categoryWeibos = CategoryWeibo.select("weibo_id").where(:category_id => categoryID).limit(200)
     
     weibos = []
     categoryWeibos.each do |cw|
@@ -35,5 +36,18 @@ class Category < ActiveRecord::Base
     end
     return weibos
   end
+  
+  def weibos_in_a_range(categoryID,range)
+    categoryWeibos = CategoryWeibo.select("weibo_id").where(["category_id=? and created_at>=?",categoryID,range]).limit(200)
+    
+    weibos = []
+    categoryWeibos.each do |cw|
+      weibo = WeiboInfo.where(:weibo_id => cw.weibo_id).first
+      weibos << weibo
+    end
+    return weibos
+  end
+  
+  
    
 end

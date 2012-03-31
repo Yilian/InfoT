@@ -2,10 +2,10 @@
 
 <table>
   <tr>
-    <th>Weibo info</th>
+    <th>Weibo_id</th>
     <th>Comments</th>
     <th>Reposts</th>
-    <th></th>
+    <th>Quantity</th>
     <th></th>
     <th></th>
   </tr>
@@ -15,6 +15,7 @@
     <td><%= count.weibo_id %></td>
     <td><%= count.comments %></td>
     <td><%= count.reposts %></td>
+    <td><%= count.quantity %></td>
     <td><%= link_to 'Show', count %></td>
     <td><%= link_to 'Edit', edit_count_path(count) %></td>
     <td><%= link_to 'Destroy', count, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -23,5 +24,12 @@
 </table>
 
 <br />
+
+<p><%= will_paginate @counts,
+       :previous_label => '上一页',
+	   :next_label => '下一页' %>
+</p>
+<br />
+
 
 <%= link_to 'New Count', new_count_path %>

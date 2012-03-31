@@ -1,3 +1,4 @@
+require "will_paginate/array"
 class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
@@ -5,9 +6,7 @@ class CategoriesController < ApplicationController
     @categories = Category.paginate :page=>params[:page], :order=>'created_at desc',
       :per_page => 20
     @category = Category.find_by_id(1)
-    
-    
-    
+       
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @categories }
@@ -18,7 +17,11 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-    @weibos = @category.weibos_in_a_category(params[:id])
+    #@weibos = @category.weibos(params[:id])
+    #weibo,@quantities = Analysis.get_hot_in_category(@category)
+    weibo,@quantities = Analysis.get_hot_in_category_byRange(@category,1)
+    @weibos = weibo.paginate(:page=>params[:page],:per_page => 10) 
+    
    
     respond_to do |format|
       format.html # show.html.erb

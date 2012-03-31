@@ -1,8 +1,24 @@
+require "will_paginate/array"
+
 class CountsController < ApplicationController
   # GET /counts
   # GET /counts.xml
   def index
-    @counts = Count.all
+    # 当counts为数据库对象时
+    @counts = Count.paginate :page=>params[:page], :order=>'quantity desc',
+      :per_page => 10
+    
+=begin
+    # 当counts为数组时    
+    counts = Count.find(:all,:order => "quantity desc")
+     count = []
+     counts.each do |c|
+       count << c
+     end
+    @counts = count.paginate(:page=>params[:page],:per_page => 10) 
+=end    
+    # @ids = Count.select("weibo_id").where("quantity > 10").order("quantity desc")
+   
 
     respond_to do |format|
       format.html # index.html.erb

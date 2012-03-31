@@ -90,7 +90,7 @@ class WeiboInfo < ActiveRecord::Base
   def set_weiboInfo(weibo, category)
     # 如果该微博已存在，则不保存该微博
     if WeiboInfo.where(:weibo_id => weibo.id).first
-      return false
+      return 
     else
       @total = 0
       WeiboInfo.new( :weibo_id => weibo.id,\
@@ -106,13 +106,12 @@ class WeiboInfo < ActiveRecord::Base
       category.total += @total
       category.save                  
     end # end if
-    return true
   end
   
   # 获取原创的微博信息
   def set_original_weiboInfo(weibo, category)
     if WeiboInfo.where(:weibo_id => weibo.id).first
-      return false
+      return 
     else
       @total = 0
       WeiboInfo.new( :weibo_id => weibo.id,\
@@ -127,7 +126,6 @@ class WeiboInfo < ActiveRecord::Base
       category.total += @total
       category.save
     end # end if
-    return true
   end
                    
     

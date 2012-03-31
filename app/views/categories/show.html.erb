@@ -23,22 +23,21 @@
     <th>Original pic url</th>
     <th>Weibo user</th>
     <th>Retweeted</th>
-    <th></th>
+    <th>Quantity</th>
     <th></th>
   </tr>
 
-<% @weibos.each do |weibo_info| %>
+<% @quantities.each do |weibo_info| %>
   <tr>
-    <td><%= weibo_info.weibo_id %></td>
-    <td><%= weibo_info.text %></td>
-    <td><%= weibo_info.original_create_at %></td>
-    <td><%= weibo_info.thumbnail_pic_url %></td>
-    <td><%= weibo_info.original_pic_url %></td>
-    <td><%= weibo_info.weibo_user_id %></td>
-    <td><%= weibo_info.retweeted_id %></td>
-    <td><%= link_to 'Show', weibo_info %></td>
-    <td><%= link_to 'Edit', edit_weibo_info_path(weibo_info) %></td>
-    <td><%= link_to 'Destroy', weibo_info, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= weibo_info[0].weibo_id %></td>
+    <td><%= weibo_info[0].text %></td>
+    <td><%= weibo_info[0].original_create_at %></td>
+    <td><%= weibo_info[0].thumbnail_pic_url %></td>
+    <td><%= weibo_info[0].original_pic_url %></td>
+    <td><%= weibo_info[0].weibo_user_id %></td>
+    <td><%= weibo_info[0].retweeted_id %></td>
+    <td><%= weibo_info[1] %></td>
+    
   </tr>
 <% end %>
 </table>
