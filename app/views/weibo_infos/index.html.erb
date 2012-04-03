@@ -9,19 +9,23 @@
     <th>Original pic url</th>
     <th>Weibo user</th>
     <th>Retweeted</th>
-    <th></th>
-    <th></th>
+    <th>Comments</th>
+    <th>Reposts</th>
+    <th>Created_at</th>
   </tr>
 
 <% @weibo_infos.each do |weibo_info| %>
   <tr>
     <td><%= weibo_info.weibo_id %></td>
     <td><%= weibo_info.text %></td>
-    <td><%= weibo_info.original_create_at %></td>
+    <td><%= DateTime.parse(weibo_info.original_create_at).strftime('%Y-%m-%d %H:%M:%S') %></td>
     <td><%= weibo_info.thumbnail_pic_url %></td>
     <td><%= weibo_info.original_pic_url %></td>
     <td><%= weibo_info.weibo_user_id %></td>
     <td><%= weibo_info.retweeted_id %></td>
+    <td><%= weibo_info.comments %></td>
+    <td><%= weibo_info.reposts %></td>
+    <td><%= weibo_info.created_at %></td>
     <td><%= link_to 'Show', weibo_info %></td>
     <td><%= link_to 'Edit', edit_weibo_info_path(weibo_info) %></td>
     <td><%= link_to 'Destroy', weibo_info, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -35,6 +39,8 @@
        :previous_label => '上一页',
 	   :next_label => '下一页' %>
 </p>
+
+<%= @weibo_infos.size%>
 
 <p>微博总数：<%= WeiboInfo.count%></p>
 <%= link_to 'New Weibo info', new_weibo_info_path %>

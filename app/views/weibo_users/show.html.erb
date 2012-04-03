@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Original:</b>
+  <%= @weibo_user.original_id %>
+</p>
+
+<p>
+  <b>Screen name:</b>
+  <%= @weibo_user.screen_name %>
+</p>
+
+<p>
+  <b>Profile img url:</b>
+  <%= @weibo_user.profile_img_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_weibo_user_path(@weibo_user) %> |
+<%= link_to 'Back', weibo_users_path %>

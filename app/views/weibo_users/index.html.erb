@@ -1,0 +1,27 @@
+<h1>Listing weibo_users</h1>
+
+<table>
+  <tr>
+    <th>Original</th>
+    <th>Screen name</th>
+    <th>Profile img url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @weibo_users.each do |weibo_user| %>
+  <tr>
+    <td><%= weibo_user.original_id %></td>
+    <td><%= weibo_user.screen_name %></td>
+    <td><%= weibo_user.profile_img_url %></td>
+    <td><%= link_to 'Show', weibo_user %></td>
+    <td><%= link_to 'Edit', edit_weibo_user_path(weibo_user) %></td>
+    <td><%= link_to 'Destroy', weibo_user, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Weibo user', new_weibo_user_path %>

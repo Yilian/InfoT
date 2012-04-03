@@ -2,8 +2,10 @@
 
 one:
   category_id: 1
-  weibo_id: 1
+  weibo_info_id: 1
+  quantity: 1
 
 two:
   category_id: 1
-  weibo_id: 1
+  weibo_info_id: 1
+  quantity: 1

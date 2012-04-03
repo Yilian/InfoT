@@ -1,4 +1,6 @@
 InfoT::Application.routes.draw do
+  resources :weibo_users
+
   resources :category_weibos
 
   resources :users

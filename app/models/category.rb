@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+  has_many :category_weibos, :dependent => :destroy 
+  has_many :weibo_infos, :through => :category_weibos
     
   def total_categories
     Category.count
@@ -23,31 +25,6 @@ class Category < ActiveRecord::Base
       end
     end
     count
-  end
+  end 
   
-  
-  def weibos(categoryID)
-    categoryWeibos = CategoryWeibo.select("weibo_id").where(:category_id => categoryID).limit(200)
-    
-    weibos = []
-    categoryWeibos.each do |cw|
-      weibo = WeiboInfo.where(:weibo_id => cw.weibo_id).first
-      weibos << weibo
-    end
-    return weibos
-  end
-  
-  def weibos_in_a_range(categoryID,range)
-    categoryWeibos = CategoryWeibo.select("weibo_id").where(["category_id=? and created_at>=?",categoryID,range]).limit(200)
-    
-    weibos = []
-    categoryWeibos.each do |cw|
-      weibo = WeiboInfo.where(:weibo_id => cw.weibo_id).first
-      weibos << weibo
-    end
-    return weibos
-  end
-  
-  
-   
 end

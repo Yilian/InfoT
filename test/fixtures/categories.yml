@@ -3,7 +3,9 @@
 one:
   name: MyString
   parent_id: 1
+  total: 0
 
 two:
   name: MyString
   parent_id: 1
+  total: 0

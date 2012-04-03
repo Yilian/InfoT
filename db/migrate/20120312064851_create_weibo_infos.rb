@@ -7,6 +7,8 @@ class CreateWeiboInfos < ActiveRecord::Migration
       t.string :thumbnail_pic_url
       t.string :original_pic_url
       t.integer :weibo_user_id
+      t.integer :comments
+      t.integer :reposts
 
       t.timestamps
     end

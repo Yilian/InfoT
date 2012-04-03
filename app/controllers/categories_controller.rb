@@ -3,8 +3,11 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.xml
   def index
-    @categories = Category.paginate :page=>params[:page], :order=>'created_at desc',
+     @categories = Category.paginate :page=>params[:page], :order=>'total desc',
       :per_page => 20
+    # category = Analysis.recommented_category_in_all
+    # @categories = category.paginate(:page=>params[:page],:per_page => 5)   
+    
     @category = Category.find_by_id(1)
        
     respond_to do |format|
@@ -17,9 +20,10 @@ class CategoriesController < ApplicationController
   # GET /categories/1.xml
   def show
     @category = Category.find(params[:id])
-    #@weibos = @category.weibos(params[:id])
-    #weibo,@quantities = Analysis.get_hot_in_category(@category)
-    weibo,@quantities = Analysis.get_hot_in_category_byRange(@category,1)
+    #weibo = Analysis.get_hot_in_category(@category)
+    #weibo = Analysis.get_hot_in_category_byRange(@category,1)
+    #weibo = Analysis.get_new_in_category(@category)
+    weibo = @category.weibo_infos
     @weibos = weibo.paginate(:page=>params[:page],:per_page => 10) 
     
    

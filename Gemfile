@@ -37,6 +37,13 @@ gem 'crack'
 # 分页所需
 gem 'will_paginate', '>= 3.0.pre'
 
+#后台下载微博
+gem 'redis','2.0.6'
+gem 'resque','1.19.0'
+gem 'resque-scheduler'
+gem 'rufus-scheduler'
+gem 'yajl-ruby'
+
 
 
 

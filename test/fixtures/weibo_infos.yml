@@ -7,6 +7,9 @@ one:
   thumbnail_pic_url: MyString
   original_pic_url: MyString
   weibo_user_id: 1
+  comments: 1
+  reposts: 1
+  retweeted_id: 0
 
 two:
   weibo_id: 1
@@ -15,3 +18,6 @@ two:
   thumbnail_pic_url: MyString
   original_pic_url: MyString
   weibo_user_id: 1
+  comments: 1
+  reposts: 1
+  retweeted_id: 0

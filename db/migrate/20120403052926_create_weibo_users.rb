@@ -1,6 +1,6 @@
-class CreateUsers < ActiveRecord::Migration
+class CreateWeiboUsers < ActiveRecord::Migration
   def self.up
-    create_table :users do |t|
+    create_table :weibo_users do |t|
       t.integer :original_id
       t.string :screen_name
       t.string :profile_img_url
@@ -10,6 +10,6 @@ class CreateUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :users
+    drop_table :weibo_users
   end
 end
