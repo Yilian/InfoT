@@ -1,0 +1,10 @@
+digraph controllers_diagram {
+	graph[overlap=false, splines=true]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|_one_time_conditions_valid_8?\l|\l|_layout\l_run_process_action_callbacks\l}"]
+	"OauthInfosController" [shape=Mrecord, label="{OauthInfosController|callback\lcreate\lindex\lnew\lupdate\l|\l|_layout\l}"]
+	"CategoriesController" [shape=Mrecord, label="{CategoriesController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\l}"]
+	"WeiboInfosController" [shape=Mrecord, label="{WeiboInfosController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\l}"]
+	"WeiboUsersController" [shape=Mrecord, label="{WeiboUsersController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\l}"]
+	"CategoryWeibosController" [shape=Mrecord, label="{CategoryWeibosController|create\ldestroy\ledit\lindex\lnew\lshow\lupdate\l|\l|_layout\l}"]
+	"ApplicationController" [shape=Mrecord, label="{ApplicationController|_one_time_conditions_valid_8?\l|\l|_layout\l_run_process_action_callbacks\l}"]
+}

@@ -6,6 +6,7 @@ Weibo::Config.api_key = "4178706590"
 Weibo::Config.api_secret = "0a4b74b632fb7f41f001aa5c23b60b87"
 
 class OauthInfosController < ApplicationController
+  before_filter :authenticate_user! 
   # GET /oauth_infos
   # GET /oauth_infos.xml
   

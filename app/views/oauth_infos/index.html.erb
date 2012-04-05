@@ -1,17 +1,33 @@
-<h1>Oauth_infos</h1>
+<div class="block">
+	<div class="secondary-navigation">
+		<ul class="wat-cf">
+			<li>
+				<%= link_to "OAuth", oauth_infos_path %>
+			</li>
+		</ul>
+	</div>
+	<div class="content">
+		<h2 class="title"> OAuth Information</h2>
+		<div class="inner">
+			<p>
+				<b><%= t("activerecord.attributes.oauth_info.atoken", :default => t("activerecord.labels.atoken", :default => "Atoken")) %>:</b>
+				<%= @oauth_info.atoken %>
+			</p>
 
-<p id="notice"><%= notice %></p>
+			<p>
+				<b><%= t("activerecord.attributes.oauth_info.asecret", :default => t("activerecord.labels.asecret", :default => "Asecret")) %>:</b>
+				<%= @oauth_info.asecret %>
+			</p>
+			<br />
+			<br />
+			<div class="wat-cf">
+				<div class="actions">
+					<%= link_to "Get a new authorization", new_oauth_info_path %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br />
+</div>
 
-<p>
-  <b>Atoken:</b>
-  <%= @oauth_info.atoken %>
-</p>
-
-<p>
-  <b>Asecret:</b>
-  <%= @oauth_info.asecret %>
-</p>
-
-<br />
-
-<%= link_to 'Get a new authorization', new_oauth_info_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

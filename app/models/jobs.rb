@@ -1,10 +1,9 @@
 require 'resque'
 
-Resque.enqueue(WeiboInfo)
-=begin
+Resque.enqueue(CollectWeibo)
+
 class Jobs
-  def start
-    Resque.enqueue(WeiboInfo)
-  end
+  #def start
+  #  Resque.enqueue(CollectWeibo)
+  #end
 end
-=end

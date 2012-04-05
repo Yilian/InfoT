@@ -1,0 +1,2 @@
+module SceneriesHelper
+end

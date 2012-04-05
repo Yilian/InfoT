@@ -1,27 +1,50 @@
-<h1>Listing category_weibos</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", category_weibos_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_category_weibo_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> CategoryWeibos</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+                    <th>
+            <%= t("activerecord.attributes.category_weibo.category_id", :default => t("activerecord.labels.category_id", :default => "Category_id")) %>
+          </th>
+                    <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @category_weibos.each do |category_weibo| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= category_weibo.id %>
+          </td>
+                    <td>
+            <%= link_to category_weibo.category_id, category_weibo_path(category_weibo) %>
+          </td>
+                    <td>
+            <%= category_weibo.created_at %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", category_weibo_path(category_weibo) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_category_weibo_path(category_weibo) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", category_weibo_path(category_weibo), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @categorie_weibos, :previous_label => '<<', :next_label => '>>' %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Category</th>
-    <th>Weibo info</th>
-    <th>Quantity</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @category_weibos.each do |category_weibo| %>
-  <tr>
-    <td><%= category_weibo.category_id %></td>
-    <td><%= category_weibo.weibo_info_id %></td>
-    <td><%= category_weibo.quantity %></td>
-    <td><%= link_to 'Show', category_weibo %></td>
-    <td><%= link_to 'Edit', edit_category_weibo_path(category_weibo) %></td>
-    <td><%= link_to 'Destroy', category_weibo, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Category weibo', new_category_weibo_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

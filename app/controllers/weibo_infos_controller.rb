@@ -1,22 +1,23 @@
 require 'will_paginate/array'
 
 class WeiboInfosController < ApplicationController
+  before_filter :authenticate_user! 
   # GET /weibo_infos
   # GET /weibo_infos.xml
   def index
 
-     #weibo = WeiboInfo.new
+     #weibo = CollectWeibo.new
      #weibo.collect_weibo_by_categories
-    # @weibo_infos = WeiboInfo.all
+     #weibo = WeiboInfo.order('created_at desc').all
   
-    # @weibo_infos = WeiboInfo.paginate(:page=>params[:page], :order=>'created_at desc',
-    #  :per_page => 10)
+    @weibo_infos = WeiboInfo.paginate(:page=>params[:page], :order=>'created_at desc',
+      :per_page => 10)
     # weibo = WeiboInfo.where("retweeted_id>?",0).order("reposts desc").limit(200)
 
-    weibo = Analysis.get_hot_in_all
-    #weibo = Analysis.get_new_in_all    
+    #weibo = Analysis.get_hot_in_all
+    #weibo = Analysis.get_new_in_all_limited 
     #weibo = Analysis.get_hot_in_range(1)
-    @weibo_infos = weibo.paginate(:page=>params[:page],:per_page => 10)    
+    #@weibo_infos = weibo.paginate(:page=>params[:page],:per_page => 10)    
 
     respond_to do |format|
       format.html # index.html.erb

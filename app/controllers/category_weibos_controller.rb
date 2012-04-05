@@ -1,9 +1,10 @@
 class CategoryWeibosController < ApplicationController
+  before_filter :authenticate_user! 
   # GET /category_weibos
   # GET /category_weibos.xml
   def index
-    @category_weibos = CategoryWeibo.all
-
+    @category_weibos = CategoryWeibo.paginate :page=>params[:page], :order=>'quantity desc',
+      :per_page => 15
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @category_weibos }

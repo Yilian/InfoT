@@ -1,0 +1,58 @@
+<%= form_tag search_path, :method => 'get', :class => "form"  do %>
+<div class="group navform wat-cf">
+	<br />
+	&nbsp;&nbsp;
+	<%= text_field_tag "q", params[:q] %>
+	&nbsp;
+	<%= submit_tag "Search", :class => "button" %>
+	<br />
+	<br />
+</div>
+<% end %>
+
+<div class="block notice">
+	<div class="sidebar-block">
+		<h4>推荐景点</h4>
+		<div class="content">
+			<ul class="navigation">
+				<% @recommends.each do |recommend| %>
+				<li>
+					<%= link_to recommend.name, new_recommend_path(recommend) %>
+				</li>
+				<hr />
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="block">
+	<div class="sidebar-block">
+		<h4>景点分类</h4>
+		<div class="content">
+			<ul>
+				<% @categories.each do |category| %>
+				<div class="block">
+					<li>
+						<p><%= category.name%></p> 
+						<div class="block">
+							<div class="content">
+								<ul class="navigation">
+									<% category.sceneries_in_a_parent(category.id).each do |subcategory| %>
+									<li>
+										<%= link_to subcategory.name, new_scenery_path(subcategory) %>
+									</li>
+									<% end %>
+									<hr />
+								</ul>
+							</div>
+						</div>
+					</li>
+				</div>
+				<% end %>
+			</ul>
+		</div>
+
+		</ul>
+	</div>
+</div>

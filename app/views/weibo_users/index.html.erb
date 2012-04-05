@@ -1,27 +1,45 @@
-<h1>Listing weibo_users</h1>
+<div class="block">
+	<div class="secondary-navigation">
+		<ul class="wat-cf">
+			<li class="first active">
+				<%= link_to "#{t("web-app-theme.list", :default => "List")}", weibo_users_path  %>
+			</li>
+			<li>
+				<%= link_to "#{t("web-app-theme.new", :default => "New")}", new_weibo_user_path %>
+			</li>
+		</ul>
+	</div>
+	<div class="content">
+		<h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> WeiboUsers</h2>
+		<div class="inner">
+			<table class="table">
+				<tr>
+					<th class="first">ID</th>
+					<th> <%= t("activerecord.attributes.weibo_user.original_id", :default => t("activerecord.labels.original_id", :default => "Original_id")) %></th>
+					<th> <%= t("activerecord.attributes.weibo_user.screen_name", :default => t("activerecord.labels.screen_name", :default => "Screen name")) %></th>
+					<th> Profile Image</th>
+					<th class="last">&nbsp;</th>
+				</tr>
+				<% @weibo_users.each do |weibo_user| -%>
+				<tr class="<%= cycle("odd", "even") %>">
+					<td> <%= weibo_user.id %></td>
+					<td> <%= link_to weibo_user.original_id, weibo_user_path(weibo_user) %></td>
+					<td> <%= weibo_user.screen_name %></td>
+					<td> <%= image_tag(weibo_user.profile_img_url, :class => "avatar" ) %></td>
+					<td class="last"> <%= link_to "#{t("web-app-theme.show", :default => "Show")}", weibo_user_path(weibo_user) %> |
+					<%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_weibo_user_path(weibo_user) %> |
+					<%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", weibo_user_path(weibo_user), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %></td>
+				</tr>
+				<% end -%>
+			</table>
+			<div class="actions-bar wat-cf">
+				<div class="actions">
+				</div>
 
-<table>
-  <tr>
-    <th>Original</th>
-    <th>Screen name</th>
-    <th>Profile img url</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+				<%= will_paginate @weibo_users, :previous_label => '<<', :next_label => '>>'  %>
+			</div>
+		</div>
+	</div>
+</div>
 
-<% @weibo_users.each do |weibo_user| %>
-  <tr>
-    <td><%= weibo_user.original_id %></td>
-    <td><%= weibo_user.screen_name %></td>
-    <td><%= weibo_user.profile_img_url %></td>
-    <td><%= link_to 'Show', weibo_user %></td>
-    <td><%= link_to 'Edit', edit_weibo_user_path(weibo_user) %></td>
-    <td><%= link_to 'Destroy', weibo_user, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Weibo user', new_weibo_user_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

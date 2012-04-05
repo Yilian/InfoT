@@ -1,44 +1,62 @@
-<h1>Listing categories</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", categories_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_category_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Categories</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+                    <th>
+            <%= t("activerecord.attributes.category.name", :default => t("activerecord.labels.name", :default => "Name")) %>
+          </th>
+                    <th>
+            <%= t("activerecord.attributes.category.parent_id", :default => t("activerecord.labels.parent_id", :default => "Parent")) %>
+          </th>
+          			<th>
+            <%= t("activerecord.attributes.category.total", :default => t("activerecord.labels.total", :default => "Total")) %>
+          </th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @categories.each do |category| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+            <%= category.id %>
+          </td>
+                    <td>
+            <%= link_to category.name, category_path(category) %>
+          </td>
+                    <td>
+            <% if Category.find_by_id(category.parent_id) %>
+    		  <%= Category.find_by_id(category.parent_id).name %>
+  			<% else %>
+   		 	  None
+  			<% end %>
+          </td>
+          			<td>
+          	<%= category.total %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", category_path(category) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_category_path(category) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", category_path(category), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @categories, :previous_label => '<<', :next_label => '>>' %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-  	<th>ID</th>
-    <th>Name</th>
-    <th>Parent</th>
-    <th>Total</th>
-    <th></th>
-  </tr>
-
-<% @categories.each do |category| %>
-  <tr>
-  	<td><%= category.id %></td>
-    <td><%= category.name %></td>
-    <td>
-    <% if Category.find_by_id(category.parent_id) %>
-    	<%= Category.find_by_id(category.parent_id).name %>
-  	<% else %>
-   		 None
-  	<% end %>
-    </td>
-     <td><%= category.total %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
-    
-  </tr>
-<% end %>
-</table>
-<p><%= will_paginate @categories,
-       :previous_label => '上一页',
-	   :next_label => '下一页' %>
-</p>
-
-<br />
-<p>分类总数&nbsp; <%= @category.total_categories %> </p>
-<br />
-<p>一级类总数&nbsp; <%= @category.total_root_categories %> </p>
-<br />
-<p><%= @category.name%>:&nbsp; <%= @category.scenery_spots_in_a_parent(@category.id) %> </p>
-<br />
-
-<%= link_to 'New Category', new_category_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

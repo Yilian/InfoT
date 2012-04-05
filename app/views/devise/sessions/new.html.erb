@@ -1,0 +1,59 @@
+<h1>InfoT</h1>
+<div class="block" id="block-login">
+	<h2>Login</h2>
+	<div class="content login">
+		<div class="flash">
+        <% add_errors_to_flash_now %>
+        <% flash.each do |type, message| -%>
+          <div class="message warning">
+            <% if message.instance_of? Array %>
+                <% message.each do |msg| %>
+            <p><%= msg %></p>
+                <% end %>
+            <% else %>
+            <p><%= message %></p>
+            <% end %>
+          </div>
+        <% end -%>
+        </div>
+		<% form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => "form login" }) do |f| %>
+		<div class="group wat-cf">
+			<div class="left">
+				<%= f.label :email, :class => "label right" %>
+			</div>
+			<div class="right">
+				<%= f.email_field :email, :class => "text_field" %>
+			</div>
+		</div>
+		<div class="group wat-cf">
+			<div class="left">
+				<%= f.label :password, :class => "label right" %>
+			</div>
+			<div class="right">
+				<%= f.password_field :password, :class => "text_field" %>
+			</div>
+		</div>
+		<% if devise_mapping.rememberable? -%>
+		<div class="group wat-cf">
+			<div class="left">
+				&nbsp;
+			</div>
+			<div class="right">
+				<%= f.check_box :remember_me, :class => "checkbox" %><%= f.label :remember_me, :class => "checkbox" %>
+			</div>
+		</div>
+		<% end -%>
+		<!-- <div class="group navform wat-cf"> -->
+		<div class="group wat-cf">
+			<div class="right">
+				<button class="button" type="submit">
+					<%= image_tag("web-app-theme/icons/key.png", :class => 'avatar') %>
+					Login
+				</button>
+			</div>
+		</div>
+		<% end %>
+		<%= render :partial => "devise/shared/links" %>
+	</div>
+</div>
+

@@ -1,0 +1,27 @@
+<h1>Listing category_weibos</h1>
+
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Weibo info</th>
+    <th>Quantity</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @category_weibos.each do |category_weibo| %>
+  <tr>
+    <td><%= category_weibo.category_id %></td>
+    <td><%= category_weibo.weibo_info_id %></td>
+    <td><%= category_weibo.quantity %></td>
+    <td><%= link_to 'Show', category_weibo %></td>
+    <td><%= link_to 'Edit', edit_category_weibo_path(category_weibo) %></td>
+    <td><%= link_to 'Destroy', category_weibo, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Category weibo', new_category_weibo_path %>

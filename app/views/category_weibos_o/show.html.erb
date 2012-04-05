@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Category:</b>
+  <%= @category_weibo.category_id %>
+</p>
+
+<p>
+  <b>Weibo info:</b>
+  <%= @category_weibo.weibo_info_id %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%= @category_weibo.quantity %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_weibo_path(@category_weibo) %> |
+<%= link_to 'Back', category_weibos_path %>

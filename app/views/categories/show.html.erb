@@ -1,58 +1,34 @@
-<p id="notice"><%= notice %></p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", categories_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_category_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", category_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.category.name", :default => t("activerecord.labels.name", :default => "Name")) %>:</b>
+          <%= @category.name %>
+        </p>
 
-<p>
-  <b>Name:</b>
-  <%= @category.name %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.category.parent_id", :default => t("activerecord.labels.parent_id", :default => "Parent")) %>:</b>
+          <%= @category.parent_id %>
+        </p>
 
-<p>
-  <b>Parent:</b>
-  <% if Category.find_by_id(@category.parent_id) %>
-    <%= Category.find_by_id(@category.parent_id).name %>
-  <% else %>
-    None
-  <% end %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.category.total", :default => t("activerecord.labels.total", :default => "Total")) %>:</b>
+          <%= @category.total %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_category_path(@category), :class => "button" %> 
+        <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), category_path(@category), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Weibo</th>
-    <th>Text</th>
-    <th>Original create at</th>
-    <th>Thumbnail pic url</th>
-    <th>Original pic url</th>
-    <th>Weibo user</th>
-    <th>Retweeted</th>
-    <th>Comments</th>
-    <th>Reposts</th>
-    <th>Created_at</th>
-  </tr>
-
-<% @weibos.each do |weibo_info| %>
-  <tr>
-    <td><%= weibo_info.weibo_id %></td>
-    <td><%= weibo_info.text %></td>
-    <td><%= DateTime.parse(weibo_info.original_create_at).strftime('%Y-%m-%d %H:%M:%S') %></td>
-    <td><%= weibo_info.thumbnail_pic_url %></td>
-    <td><%= weibo_info.original_pic_url %></td>
-    <td><%= weibo_info.weibo_user_id %></td>
-    <td><%= weibo_info.retweeted_id %></td>
-    <td><%= weibo_info.comments %></td>
-    <td><%= weibo_info.reposts %></td>
-    <td><%= weibo_info.created_at %></td>
-    <td><%= link_to 'Show', weibo_info %></td>
-    <td><%= link_to 'Edit', edit_weibo_info_path(weibo_info) %></td>
-    <td><%= link_to 'Destroy', weibo_info, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-<p><%= will_paginate @weibos,
-       :previous_label => '上一页',
-	   :next_label => '下一页' %>
-</p>
-
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

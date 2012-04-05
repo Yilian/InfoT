@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Weibo:</b>
+  <%= @weibo_info.weibo_id %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @weibo_info.text %>
+</p>
+
+<p>
+  <b>Original create at:</b>
+  <%= @weibo_info.original_create_at %>
+</p>
+
+<p>
+  <b>Thumbnail pic url:</b>
+  <%= @weibo_info.thumbnail_pic_url %>
+</p>
+
+<p>
+  <b>Original pic url:</b>
+  <%= @weibo_info.original_pic_url %>
+</p>
+
+<p>
+  <b>Weibo user:</b>
+  <%= @weibo_info.weibo_user_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_weibo_info_path(@weibo_info) %> |
+<%= link_to 'Back', weibo_infos_path %>

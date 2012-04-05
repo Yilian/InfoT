@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+
+<p>
+  <b>Parent:</b>
+  <% if Category.find_by_id(@category.parent_id) %>
+    <%= Category.find_by_id(@category.parent_id).name %>
+  <% else %>
+    None
+  <% end %>
+</p>
+
+<table>
+  <tr>
+    <th>Weibo</th>
+    <th>Text</th>
+    <th>Original create at</th>
+    <th>Thumbnail pic url</th>
+    <th>Original pic url</th>
+    <th>Weibo user</th>
+    <th>Retweeted</th>
+    <th>Comments</th>
+    <th>Reposts</th>
+    <th>Created_at</th>
+  </tr>
+
+<% @weibos.each do |weibo_info| %>
+  <tr>
+    <td><%= weibo_info.weibo_id %></td>
+    <td><%= weibo_info.text %></td>
+    <td><%= DateTime.parse(weibo_info.original_create_at).strftime('%Y-%m-%d %H:%M:%S') %></td>
+    <td><%= weibo_info.thumbnail_pic_url %></td>
+    <td><%= weibo_info.original_pic_url %></td>
+    <td><%= weibo_info.weibo_user_id %></td>
+    <td><%= weibo_info.retweeted_id %></td>
+    <td><%= weibo_info.comments %></td>
+    <td><%= weibo_info.reposts %></td>
+    <td><%= weibo_info.created_at %></td>
+    <td><%= link_to 'Show', weibo_info %></td>
+    <td><%= link_to 'Edit', edit_weibo_info_path(weibo_info) %></td>
+    <td><%= link_to 'Destroy', weibo_info, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<p><%= will_paginate @weibos,
+       :previous_label => '上一页',
+	   :next_label => '下一页' %>
+</p>
+
+
+<%= link_to 'Edit', edit_category_path(@category) %> |
+<%= link_to 'Back', categories_path %>

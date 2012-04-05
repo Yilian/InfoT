@@ -1,8 +1,10 @@
 class WeiboUsersController < ApplicationController
+  before_filter :authenticate_user! 
   # GET /weibo_users
   # GET /weibo_users.xml
   def index
-    @weibo_users = WeiboUser.all
+    @weibo_users = WeiboUser.paginate(:page=>params[:page], :order=>'created_at desc',
+      :per_page => 10)
 
     respond_to do |format|
       format.html # index.html.erb

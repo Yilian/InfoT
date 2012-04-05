@@ -38,5 +38,17 @@ module InfoT
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+    
+    # Change the layout for sign-in/sign-up
+    config.to_prepare do
+      Devise::SessionsController.layout "sign"
+      Devise::RegistrationsController.layout "sign"
+      CategoriesController.layout "admin"
+      CategoryWeibosController.layout "admin"
+      OauthInfosController.layout "admin"
+      UsersController.layout "admin"
+      WeiboInfosController.layout "admin"
+      WeiboUsersController.layout "admin"
+    end
   end
 end

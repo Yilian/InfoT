@@ -1,0 +1,49 @@
+<h1>Listing categories</h1>
+
+<%= form_tag search_path, :method => 'get' do %>
+<%= text_field_tag "q", params[:q] %>
+<%= submit_tag "Search"%>
+<% end %>
+
+<table>
+  <tr>
+  	<th>ID</th>
+    <th>Name</th>
+    <th>Parent</th>
+    <th>Total</th>
+    <th></th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+  	<td><%= category.id %></td>
+    <td><%= category.name %></td>
+    <td>
+    <% if Category.find_by_id(category.parent_id) %>
+    	<%= Category.find_by_id(category.parent_id).name %>
+  	<% else %>
+   		 None
+  	<% end %>
+    </td>
+     <td><%= category.total %></td>
+    <td><%= link_to 'Show', category %></td>
+    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= link_to 'Destroy', category, :confirm => 'Are you sure?', :method => :delete %></td>
+    
+  </tr>
+<% end %>
+</table>
+<p><%= will_paginate @categories,
+       :previous_label => '上一页',
+	   :next_label => '下一页' %>
+</p>
+
+<br />
+<p>分类总数&nbsp; <%= @category.total_categories %> </p>
+<br />
+<p>一级类总数&nbsp; <%= @category.total_root_categories %> </p>
+<br />
+<p><%= @category.name%>:&nbsp; <%= @category.scenery_spots_in_a_parent(@category.id) %> </p>
+<br />
+
+<%= link_to 'New Category', new_category_path %>

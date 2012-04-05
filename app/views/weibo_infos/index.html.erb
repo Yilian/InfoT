@@ -1,46 +1,50 @@
-<h1>Listing weibo_infos</h1>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first active"><%= link_to "#{t("web-app-theme.list", :default => "List")}", weibo_infos_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_weibo_info_path %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> WeiboInfos</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID/Image</th>
+                    <th>
+            <%= t("activerecord.attributes.weibo_info.text", :default => t("activerecord.labels.text", :default => "Text")) %>
+          </th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @weibo_infos.each do |weibo_info| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+          <td>
+          	<% if weibo_info.thumbnail_pic_url %>
+          	  <%= link_to image_tag(weibo_info.thumbnail_pic_url, :class => "avatar" ), weibo_info %>
+          	<% else %>
+          	  <%= link_to weibo_info.weibo_id, weibo_info_path(weibo_info) %>
+          	<% end %>
+          </td>
+          <td>
+          	<%= weibo_info.text %>
+          </td>
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", weibo_info_path(weibo_info) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_weibo_info_path(weibo_info) %> |
+            <%= link_to "#{t("web-app-theme.delete", :default => "Delete")}", weibo_info_path(weibo_info), :method => :delete, :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+          </td>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+        <%= will_paginate @categories, :previous_label => '<<', :next_label => '>>' %>
+        
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-  <tr>
-    <th>Weibo</th>
-    <th>Text</th>
-    <th>Original create at</th>
-    <th>Thumbnail pic url</th>
-    <th>Original pic url</th>
-    <th>Weibo user</th>
-    <th>Retweeted</th>
-    <th>Comments</th>
-    <th>Reposts</th>
-    <th>Created_at</th>
-  </tr>
-
-<% @weibo_infos.each do |weibo_info| %>
-  <tr>
-    <td><%= weibo_info.weibo_id %></td>
-    <td><%= weibo_info.text %></td>
-    <td><%= DateTime.parse(weibo_info.original_create_at).strftime('%Y-%m-%d %H:%M:%S') %></td>
-    <td><%= weibo_info.thumbnail_pic_url %></td>
-    <td><%= weibo_info.original_pic_url %></td>
-    <td><%= weibo_info.weibo_user_id %></td>
-    <td><%= weibo_info.retweeted_id %></td>
-    <td><%= weibo_info.comments %></td>
-    <td><%= weibo_info.reposts %></td>
-    <td><%= weibo_info.created_at %></td>
-    <td><%= link_to 'Show', weibo_info %></td>
-    <td><%= link_to 'Edit', edit_weibo_info_path(weibo_info) %></td>
-    <td><%= link_to 'Destroy', weibo_info, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<p><%= will_paginate @weibo_infos,
-       :previous_label => '上一页',
-	   :next_label => '下一页' %>
-</p>
-
-<%= @weibo_infos.size%>
-
-<p>微博总数：<%= WeiboInfo.count%></p>
-<%= link_to 'New Weibo info', new_weibo_info_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,0 +1,50 @@
+<div class="block" id="block-signup">
+	<h2>Sign up</h2>
+	<div class="content">
+		<div class="flash">
+        <% add_errors_to_flash_now %>
+        <% flash.each do |type, message| -%>
+          <div class="message <%= type %>">
+            <% if message.instance_of? Array %>
+                <% message.each do |msg| %>
+            <p><%= msg %></p>
+                <% end %>
+            <% else %>
+            <p><%= message %></p>
+            <% end %>
+          </div>
+        <% end -%>
+        </div>
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form login" }) do |f| %>
+		<div class="fieldWithErrors">
+			<div class="error">
+				<p>
+					<%= devise_error_messages! %>
+				</p>
+			</div>
+	    </div>
+		<div class="group wat-cf">
+			<%= f.label :email, :class => "label" %>
+			<%= f.email_field :email, :class => "text_field" %>
+			<span class="description">Ex: test@example.com</span>
+		</div>
+		<div class="group wat-cf">
+			<%= f.label :password, :class => "label" %>
+			<%= f.password_field :password, :class => "text_field" %>
+			<span class="description">Must be at least 6 characters</span>
+		</div>
+		<div class="group wat-cf">
+			<%= f.label :password_confirmation, "Re-enter Password", :class => "label" %>
+			<%= f.password_field :password_confirmation, :class => "text_field" %>
+		</div>
+		<!-- <div class="group navform wat-cf"> -->
+		<div class="group wat-cf">
+			<button class="button" type="submit">
+				<%= image_tag( "web-app-theme/icons/tick.png", :class => 'avatar') %>
+				Sign up
+			</button>
+		</div>
+		<% end %>
+		<%= render :partial => "devise/shared/links" %>
+	</div>
+</div>

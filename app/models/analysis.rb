@@ -7,12 +7,12 @@ class Analysis
   #                           推荐景点
   #*****************************************************************
   # 总推荐景点10个
-  def self.recommented_category_in_all
-    weibos = Category.find(:all, :order=>'total desc', :limit => 10 )
+  def self.recommend_category_in_all
+    categories = Category.where("parent_id>?",1).order('total desc').limit(10)
   end
   
   # 某时间段内推荐景点10个
-  def self.recommented_category_in_range(days, weeks=0, months=0)
+  def self.recommend_category_in_range(days, weeks=0, months=0)
     range = Time.now - ( days*DAY + weeks*WEEK + months*MONTH)
     # do somethinga
   end
@@ -21,15 +21,15 @@ class Analysis
   #*****************************************************************
   #                           最新
   #*****************************************************************
-  #返回所有微博中最新的200条微博
-  def self.get_new_in_all
-    weibos = WeiboInfo.find(:all, :order=>'created_at desc', :limit => 200 )
+  #返回所有微博中最新的500条微博
+  def self.get_new_in_all_limited
+    weibos = WeiboInfo.find(:all, :order=>'created_at desc', :limit => 500 )
     return weibos
   end
   
-  #返回某景点的微博中最新的200条微博
-  def self.get_new_in_category(category)
-    categoryWeibos = CategoryWeibo.where(:category_id => category.id).order('created_at desc').limit(200)
+  #返回某景点的微博中最新的500条微博
+  def self.get_new_in_category_limited(category)
+    categoryWeibos = CategoryWeibo.where(:category_id => category.id).order('created_at desc').limit(500)
     
     weibos = []
     categoryWeibos.each do |cw|
@@ -42,20 +42,21 @@ class Analysis
   #*****************************************************************
   #                           最热
   #*****************************************************************
-  #返回所有微博中最热的200条微博
+  #返回所有微博中最热的500条微博
   def self.get_hot_in_all
-    categoryWeibos = CategoryWeibo.find(:all, :order=>'quantity desc', :limit => 200 )
+    #categoryWeibos = CategoryWeibo.order('quantity desc').all
+    categoryWeibos = CategoryWeibo.find(:all, :order=>'quantity desc', :limit => 500 )
     weibos = []
     categoryWeibos.each do |cw|
       weibos << cw.weibo_info
-    end
+    end 
     return weibos
   end
   
-  #返回一定时间内所有微博中最热的200条微博
+  #返回一定时间内所有微博中最热的500条微博
   def self.get_hot_in_range(days, weeks=0, months=0)
     range = Time.now - ( days*DAY + weeks*WEEK + months*MONTH)
-    categoryWeibos = CategoryWeibo.where("created_at>=?",range).order('quantity desc').limit(200)
+    categoryWeibos = CategoryWeibo.where("created_at>=?",range).order('quantity desc').limit(500)
     weibos = []
     categoryWeibos.each do |cw|
       weibos << WeiboInfo.where("id = '#{cw.weibo_info_id}'").first
@@ -64,9 +65,9 @@ class Analysis
   end
   
      
-  #返回某景点微博中最热的200条微博
+  #返回某景点微博中最热的500条微博
   def self.get_hot_in_category(category)
-    categoryWeibos = CategoryWeibo.where(:category_id => category.id).order('quantity desc').limit(200)
+    categoryWeibos = CategoryWeibo.where(:category_id => category.id).order('quantity desc').limit(500)
     
     weibos = []
     categoryWeibos.each do |cw|
@@ -75,10 +76,10 @@ class Analysis
     return weibos 
   end
   
-  #返回某景点一定时间内微博中最热的200条微博
+  #返回某景点一定时间内微博中最热的500条微博
   def self.get_hot_in_category_byRange(category, days, weeks=0, months=0)
     range = Time.now - ( days*DAY + weeks*WEEK + months*MONTH)
-    categoryWeibos = CategoryWeibo.where(["category_id=? and created_at>=?",category.id,range]).order('quantity desc').limit(200)
+    categoryWeibos = CategoryWeibo.where(["category_id=? and created_at>=?",category.id,range]).order('quantity desc').limit(500)
     weibos = []
     categoryWeibos.each do |cw|
       weibos << cw.weibo_info

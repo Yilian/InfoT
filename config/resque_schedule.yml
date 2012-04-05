@@ -1,6 +1,6 @@
 getWeiboInfo:
   every: 10m
-  class: WeiboInfo
+  class: CollectWeibo
   args: 
   queue: weibo
   description: "从新浪微博服务端下载微博信息"

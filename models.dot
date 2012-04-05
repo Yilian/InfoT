@@ -1,0 +1,14 @@
+digraph models_diagram {
+	graph[overlap=false, splines=true]
+	"OauthInfo" [shape=Mrecord, label="{OauthInfo|atoken :string\lasecret :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Category" [shape=Mrecord, label="{Category|name :string\lcreated_at :datetime\lupdated_at :datetime\ltotal :integer\l}"]
+	"WeiboInfo" [shape=Mrecord, label="{WeiboInfo|text :text\loriginal_create_at :string\lthumbnail_pic_url :string\loriginal_pic_url :string\lcomments :integer\lreposts :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Analysis" [shape=record, label="{Analysis|}"]
+	"Jobs" [shape=record, label="{Jobs|}"]
+	"WeiboUser" [shape=Mrecord, label="{WeiboUser|screen_name :string\lprofile_img_url :string\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"CategoryWeibo" [shape=Mrecord, label="{CategoryWeibo|quantity :integer\lcreated_at :datetime\lupdated_at :datetime\l}"]
+	"Category" -> "WeiboInfo" [arrowtail=crow, arrowhead=crow, dir=both]
+	"Category" -> "CategoryWeibo" [arrowtail=crow, arrowhead=dot, dir=both]
+	"WeiboInfo" -> "CategoryWeibo" [arrowtail=crow, arrowhead=dot, dir=both]
+	"WeiboUser" -> "WeiboInfo" [arrowtail=crow, arrowhead=dot, dir=both]
+}

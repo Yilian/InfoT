@@ -1,35 +1,64 @@
-<p id="notice"><%= notice %></p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", weibo_infos_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_weibo_info_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", weibo_info_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.weibo_id", :default => t("activerecord.labels.weibo_id", :default => "Weibo")) %>:</b>
+          <%= @weibo_info.weibo_id %>
+        </p>
 
-<p>
-  <b>Weibo:</b>
-  <%= @weibo_info.weibo_id %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.text", :default => t("activerecord.labels.text", :default => "Text")) %>:</b>
+          <%= @weibo_info.text %>
+        </p>
 
-<p>
-  <b>Text:</b>
-  <%= @weibo_info.text %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.original_create_at", :default => t("activerecord.labels.original_create_at", :default => "Original create at")) %>:</b>
+          <%= DateTime.parse(@weibo_info.original_create_at).strftime('%Y-%m-%d %H:%M:%S') %>
+        </p>
 
-<p>
-  <b>Original create at:</b>
-  <%= @weibo_info.original_create_at %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.thumbnail_pic_url", :default => t("activerecord.labels.thumbnail_pic_url", :default => "Thumbnail pic url")) %>:</b>
+          <%= image_tag(@weibo_info.thumbnail_pic_url, :class => "avatar" ) %>
+        </p>
 
-<p>
-  <b>Thumbnail pic url:</b>
-  <%= @weibo_info.thumbnail_pic_url %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.original_pic_url", :default => t("activerecord.labels.original_pic_url", :default => "Original pic url")) %>:</b>
+          <%= image_tag(@weibo_info.original_pic_url, :class => "avatar" ) %>
+        </p>
 
-<p>
-  <b>Original pic url:</b>
-  <%= @weibo_info.original_pic_url %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.weibo_user_id", :default => t("activerecord.labels.weibo_user_id", :default => "Weibo user")) %>:</b>
+          <%= @weibo_info.weibo_user_id %>
+        </p>
 
-<p>
-  <b>Weibo user:</b>
-  <%= @weibo_info.weibo_user_id %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.comments", :default => t("activerecord.labels.comments", :default => "Comments")) %>:</b>
+          <%= @weibo_info.comments %>
+        </p>
 
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.reposts", :default => t("activerecord.labels.reposts", :default => "Reposts")) %>:</b>
+          <%= @weibo_info.reposts %>
+        </p>
 
-<%= link_to 'Edit', edit_weibo_info_path(@weibo_info) %> |
-<%= link_to 'Back', weibo_infos_path %>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_info.retweeted_id", :default => t("activerecord.labels.retweeted_id", :default => "Retweeted")) %>:</b>
+          <%= @weibo_info.retweeted_id %>
+        </p>
+      <div class="wat-cf">
+        <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_weibo_info_path(@weibo_info), :class => "button" %> 
+        <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), weibo_info_path(@weibo_info), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'sidebar') -%>

@@ -1,20 +1,35 @@
-<p id="notice"><%= notice %></p>
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="first"><%= link_to "#{t("web-app-theme.list", :default => "List")}", weibo_users_path  %></li>
+      <li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_weibo_user_path %></li>
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", weibo_user_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+      	<p>
+          <b><%= t("activerecord.attributes.weibo_user.profile_img_url", :default => t("activerecord.labels.profile_img_url", :default => "Profile img url")) %>:</b>
+          <%= image_tag(@weibo_user.profile_img_url, :class => "avatar" ) %>
+        </p>
+        
+        <p>
+          <b><%= t("activerecord.attributes.weibo_user.original_id", :default => t("activerecord.labels.original_id", :default => "Original")) %>:</b>
+          <%= @weibo_user.original_id %>
+        </p>
 
-<p>
-  <b>Original:</b>
-  <%= @weibo_user.original_id %>
-</p>
+        <p>
+          <b><%= t("activerecord.attributes.weibo_user.screen_name", :default => t("activerecord.labels.screen_name", :default => "Screen name")) %>:</b>
+          <%= @weibo_user.screen_name %>
+        </p>
 
-<p>
-  <b>Screen name:</b>
-  <%= @weibo_user.screen_name %>
-</p>
+      <div class="wat-cf">
+        <%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_weibo_user_path(@weibo_user), :class => "button" %> 
+        <%= link_to image_tag("web-app-theme/icons/cross.png", :alt => "#{t("web-app-theme.delete", :default=> "Delete")}") + " " + t("web-app-theme.delete", :default => "Delete"), weibo_user_path(@weibo_user), :method => "delete", :class => "button", :confirm => "#{t("web-app-theme.confirm", :default => "Are you sure?")}" %>
+      </div>      
+    </div>
+  </div>
+</div>
 
-<p>
-  <b>Profile img url:</b>
-  <%= @weibo_user.profile_img_url %>
-</p>
-
-
-<%= link_to 'Edit', edit_weibo_user_path(@weibo_user) %> |
-<%= link_to 'Back', weibo_users_path %>
+<% content_for :sidebar, render(:partial => 'sidebar') -%>
